@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "913797d8-e32e-48fb-a10c-e09b3ca1c30a",
+		"name": "Retiro_CP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12557753",
+		"_collection_link": "https://crimson-comet-125376.postman.co/workspace/New-Team-Workspace~edd1192d-96cf-4f9e-8fb8-ba301bed6988/collection/12557753-913797d8-e32e-48fb-a10c-e09b3ca1c30a?action=share&source=collection_link&creator=12557753"
+	},
+	"item": [
+		{
+			"name": "GetToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseData = pm.response.json();\r",
+							"pm.collectionVariables.set('TOKEN', responseData.Token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dealerCode\": \"3511\",\r\n    \"terminalCode\": \"19\",\r\n    \"terminalPassword\": \"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/apiToken/token",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"apiToken",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConsultaRetiroEfectivo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DateTimeRequest\": \"2023-10-17 19:31:56.000\",\r\n    \"productCode\": \"0200007654481\",\r\n    \"reference\": \"5553717891548971572\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/api/ConsultaRetiroEfectivo",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"api",
+						"ConsultaRetiroEfectivo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EjecutaRetiroEfectivo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DateTimeRequest\": \"2023-10-17 19:31:56.000\",\r\n    \"productCode\": \"0200007654481\",\r\n    \"reference\": \"5553717891548971572\",\r\n    \"amount\":1000,\r\n    \"posTransactionID\":\"00240507012505301783\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/api/EjecutaRetiroEfectivo",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"api",
+						"EjecutaRetiroEfectivo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VerificaRetiroEfectivo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DateTimeRequest\": \"2023-10-17 19:31:56.000\",\r\n    \"posTransactionID\":\"00240507012505301783\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/api/VerificaRetiroEfectivo",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"api",
+						"VerificaRetiroEfectivo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReversoRetiroEfectivo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DateTimeRequest\": \"2023-10-17 19:31:56.000\",\r\n    \"posTransactionID\":\"00240507012505301783\",\r\n    \"reference\": \"5553717891548971572\",\r\n    \"amount\":1000    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BASE}}/api/ReversoRetiroEfectivo",
+					"host": [
+						"{{URL_BASE}}"
+					],
+					"path": [
+						"api",
+						"ReversoRetiroEfectivo"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_BASE",
+			"value": "http://localhost:39537",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "TOKEN",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3YTcyNDEzMy1jOWIyLTQ3OTctYjc2ZS01ZGNhOWZmOTdjOTYiLCJEZWFsZXJDb2RlIjoiMzUxMSIsIlRlcm1pbmFsQ29kZSI6IjE5IiwiVGVybWluYWxQYXNzIjoiIiwibmJmIjoxNzE5MDAxMjE4LCJleHAiOjE3MTkxMDU2MTgsImlzcyI6InJwbW14Lm5ldCIsImF1ZCI6InJwbW14Lm5ldCJ9.XFokMTfgrg8pW77II9fHsw56A5q62MXKmMjY08FTT0E",
+			"type": "string"
+		},
+		{
+			"key": "URL_BASE",
+			"value": "http://qa.clubpago.site/retiros/",
+			"type": "string"
+		}
+	]
+}
